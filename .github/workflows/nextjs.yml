@@ -73,12 +73,6 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} --force --ignore-scripts
-      - name: Verify dependencies
-        run: |
-          if [ ! -f "./node_modules/lightningcss/linux-x64-gnu.node" ]; then
-            echo "Missing lightningcss binary. Reinstalling..."
-            ${{ steps.detect-package-manager.outputs.runner }} install lightningcss
-          fi
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
